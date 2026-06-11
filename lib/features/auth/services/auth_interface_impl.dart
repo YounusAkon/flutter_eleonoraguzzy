@@ -36,6 +36,7 @@ final class AuthInterfaceImpl extends AuthInterface {
             accessToken: loginResponse.data!.accessToken,
             refreshToken: loginResponse.data!.refreshToken,
             data: {
+              'userId': loginResponse.data!.user.id,
               'name': loginResponse.data!.user.name,
               'email': loginResponse.data!.user.email,
               'role': loginResponse.data!.user.role,
