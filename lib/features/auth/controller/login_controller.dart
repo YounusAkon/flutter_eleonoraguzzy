@@ -41,12 +41,12 @@ class LoginController extends GetxController {
     });
   }
 
-  @override
-  void onClose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  //   super.onClose();
+  // }
 
   set email(String value) {
     if (value != _email) {

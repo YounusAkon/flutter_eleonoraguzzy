@@ -3,8 +3,10 @@ import 'package:flutter_eleonoraguzzy/core/services/app_pigeon/app_pigeon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eleonoraguzzy/core/constants/api_endpoints.dart';
 import 'package:flutter_eleonoraguzzy/core/helpers/auth_role.dart';
+import 'package:flutter_eleonoraguzzy/core/services/local_storage/onboarding_storage.dart';
 import 'package:flutter_eleonoraguzzy/features/auth/presentation/screens/login_screen.dart';
 import 'package:flutter_eleonoraguzzy/features/nabber_screen.dart';
+import 'package:flutter_eleonoraguzzy/features/onbording/onboarding1.dart';
 import 'package:flutter_eleonoraguzzy/features/profile/controller/get_profile_controller.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
@@ -95,6 +97,8 @@ class AppManager extends GetxController {
   AuthStatus _authStatus = AuthLoading();
   AuthStatus get currentAuthStatus => _authStatus;
 
+  bool _onboardingChecked = false;
+
   final Debouncer authDebouncer = Debouncer(
     delay: const Duration(milliseconds: 100),
   );
@@ -117,14 +121,36 @@ class AppManager extends GetxController {
     });
   }
 
-  Future<void> _decideRoute(AuthStatus? authStatus) async {
-    if (authStatus is UnAuthenticated) {
-      _authStatus = authStatus;
+  /// Called by the onboarding flow once the user finishes (or skips) it.
+  /// Marks onboarding as seen and routes to the screen matching the
+  /// current auth status.
+  Future<void> completeOnboarding() async {
+    await OnboardingStorage.setOnboardingSeen();
+    _onboardingChecked = true;
+    await _decideRoute(_authStatus);
+  }
 
+  Future<void> _decideRoute(AuthStatus? authStatus) async {
+    if (authStatus == null || authStatus is AuthLoading) return;
+
+    _authStatus = authStatus;
+
+    // Show onboarding only on the very first app launch.
+    if (!_onboardingChecked) {
+      _onboardingChecked = true;
+
+      final hasSeenOnboarding = await OnboardingStorage.hasSeenOnboarding();
+      if (!hasSeenOnboarding) {
+        Get.offAll(() => const Onboarding1Screen());
+        update();
+        return;
+      }
+    }
+
+    if (authStatus is UnAuthenticated) {
       Get.offAll(() => LoginScreen());
     } else if (authStatus is Authenticated) {
       debugPrint("Delegating to Homeview");
-      _authStatus = authStatus;
 
       await _initializeControllers();
 

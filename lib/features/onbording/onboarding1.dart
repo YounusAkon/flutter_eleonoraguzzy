@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/app/app_manager.dart';
 import 'package:flutter_eleonoraguzzy/core/theme/app_colors.dart';
-import 'package:flutter_eleonoraguzzy/features/auth/presentation/screens/login_screen.dart';
 import 'package:flutter_eleonoraguzzy/features/onbording/app_gradient.dart';
 import 'package:flutter_eleonoraguzzy/features/onbording/onboarding2.dart';
+import 'package:get/get.dart';
 
 class Onboarding1Screen extends StatelessWidget {
   const Onboarding1Screen({super.key});
@@ -22,12 +23,7 @@ class Onboarding1Screen extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginScreen(),
-                          ),
-                        );
+                        Get.find<AppManager>().completeOnboarding();
                       },
                       child: const Text(
                         "Skip",

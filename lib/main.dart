@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_eleonoraguzzy/app/app_manager.dart';
 import 'package:flutter_eleonoraguzzy/core/di/external_service_di.dart';
 import 'package:flutter_eleonoraguzzy/core/di/internal_service_di.dart';
+import 'package:flutter_eleonoraguzzy/core/services/local_storage/fresh_install_guard.dart';
 import 'package:flutter_eleonoraguzzy/core/theme/app_theme.dart';
 import 'package:flutter_eleonoraguzzy/features/auth/presentation/widgets/splash_screen.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await FreshInstallGuard.clearStaleDataOnFreshInstall();
   externalServiceDI();
   initServices();
   runApp(const MyApp());
