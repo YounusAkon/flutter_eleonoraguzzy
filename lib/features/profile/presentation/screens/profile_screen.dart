@@ -131,6 +131,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         "Get the information you need",
                         () => Get.to(() => AboutAppScreen()),
                       ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                  child: Column(
+                    children: [
                       _buildMenuItem1(Icons.logout, 'Logout', () {
                         showLogoutDialog(
                           onConfirm: () {
