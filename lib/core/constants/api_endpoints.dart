@@ -74,9 +74,9 @@ base class ApiEndpoints {
 //arrow360degree@gmail.com
 
 class _RemoteServer {
-  static const String socketUrl = 'https://fnfd0757-5005.inc1.devtunnels.ms';
+  static const String socketUrl = 'https://backend-eleonoraguzzy-s0fd.onrender.com';
 
-  static const String baseUrl = 'https://fnfd0757-5005.inc1.devtunnels.ms/api/v1';
+  static const String baseUrl = 'https://backend-eleonoraguzzy-s0fd.onrender.com/api/v1';
 }
 
 class _LocalHostWifi {
