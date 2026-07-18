@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eleonoraguzzy/core/theme/app_colors.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/we_contribute%20/controller/active_surveys_controller.dart';
 import 'package:flutter_eleonoraguzzy/features/we_contribute%20/model/active_surveys_model.dart';
 import 'package:flutter_eleonoraguzzy/features/we_contribute%20/presentation/screens/take_survey_screen.dart';
@@ -27,7 +28,7 @@ class ActiveSurveysScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF2F6FF),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: AppSizes.screenPadding,
         child: Container(
           padding: EdgeInsets.all(16),
           decoration: BoxDecoration(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/tender/model/tender_model.dart';
 import 'package:flutter_eleonoraguzzy/features/tender/screen/tender_screen.dart';
 
@@ -35,7 +36,7 @@ class _TenderDetailsScreenState extends State<TenderDetailsScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: AppSizes.screenPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

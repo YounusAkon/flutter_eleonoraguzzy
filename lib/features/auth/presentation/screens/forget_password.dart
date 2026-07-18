@@ -3,6 +3,7 @@ import 'package:flutter_eleonoraguzzy/core/common/widget/reactive_button/save_bu
 import 'package:flutter_eleonoraguzzy/features/auth/controller/forget_password%20controller.dart';
 import 'package:flutter_eleonoraguzzy/features/auth/presentation/screens/enter_otp.dart';
 import 'package:get/get.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/onbording/app_gradient.dart';
 import 'package:flutter_eleonoraguzzy/features/onbording/common/app_logo.dart';
 import 'package:flutter_eleonoraguzzy/features/onbording/common/textfield.dart';
@@ -10,7 +11,6 @@ import 'package:flutter_eleonoraguzzy/core/notifiers/snackbar_notifier.dart';
 
 class ForgetPassword extends StatelessWidget {
   const ForgetPassword({super.key});
-  
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +34,13 @@ class ForgetPassword extends StatelessWidget {
                       minHeight: constraints.maxHeight,
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0,
-                        vertical: 16,
-                      ),
+                      padding: AppSizes.screenPadding,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const SizedBox(height: 40),
                           const AppLogo(),
-                    
+
                           const Text(
                             "Your City, Your Voice Matter",
                             textAlign: TextAlign.center,
@@ -53,9 +50,9 @@ class ForgetPassword extends StatelessWidget {
                               height: 1.5,
                             ),
                           ),
-                    
+
                           const SizedBox(height: 20),
-                    
+
                           const Text(
                             "Reset Password",
                             style: TextStyle(
@@ -64,9 +61,9 @@ class ForgetPassword extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                    
+
                           const SizedBox(height: 16),
-                    
+
                           const Text(
                             "Please enter your email to reset your password",
                             style: TextStyle(
@@ -75,7 +72,7 @@ class ForgetPassword extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
-                    
+
                           const SizedBox(height: 16),
                           LabeledTextField(
                             title: "Email",
@@ -95,7 +92,7 @@ class ForgetPassword extends StatelessWidget {
                               return null;
                             },
                           ),
-                    
+
                           const SizedBox(height: 24),
                           // SizedBox(
                           //   width: double.infinity,
@@ -113,7 +110,7 @@ class ForgetPassword extends StatelessWidget {
                           //         snackbarNotifier:
                           //             controller.snackbarNotifier,
                           //       );
-                    
+
                           //       Navigator.push(
                           //         context,
                           //         MaterialPageRoute(
@@ -121,7 +118,7 @@ class ForgetPassword extends StatelessWidget {
                           //         ),
                           //       );
                           //     },
-                    
+
                           //     child: const Text(
                           //       "Send OTP",
                           //       style: TextStyle(
@@ -144,14 +141,14 @@ class ForgetPassword extends StatelessWidget {
                             onSaveTap: () {
                               controller.forgetPassword(
                                 buttonNotifier: controller.processNotifier,
-                                snackbarNotifier:
-                                    controller.snackbarNotifier,
+                                snackbarNotifier: controller.snackbarNotifier,
                               );
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => EnterOtp(
-                                    email: controller.emailController.text,),
+                                    email: controller.emailController.text,
+                                  ),
                                 ),
                               );
                             },

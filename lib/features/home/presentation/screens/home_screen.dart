@@ -5,6 +5,7 @@ import 'package:flutter_eleonoraguzzy/features/notification/screen/notification_
 import 'package:flutter_eleonoraguzzy/features/onbording/common/app_logo.dart';
 import 'package:flutter_eleonoraguzzy/features/profile/controller/get_profile_controller.dart';
 import 'package:flutter_eleonoraguzzy/features/profile/presentation/screens/profile_screen.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -73,7 +74,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 bottomRight: Radius.circular(12),
               ),
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSizes.screenPaddingValue,
+              vertical: 12,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -149,10 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
+                padding: AppSizes.screenPadding,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

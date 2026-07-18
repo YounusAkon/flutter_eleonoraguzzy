@@ -3,6 +3,7 @@ import 'package:flutter_eleonoraguzzy/core/common/widget/reactive_button/save_bu
 import 'package:flutter_eleonoraguzzy/features/auth/controller/create_new_password_controller.dart';
 import 'package:flutter_eleonoraguzzy/features/auth/presentation/screens/login_screen.dart';
 import 'package:get/get.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/onbording/app_gradient.dart';
 import 'package:flutter_eleonoraguzzy/features/onbording/common/app_logo.dart';
 import 'package:flutter_eleonoraguzzy/features/onbording/common/textfield.dart';
@@ -40,10 +41,7 @@ class ResetPassword extends StatelessWidget {
                   ),
                   child: IntrinsicHeight(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0,
-                        vertical: 16,
-                      ),
+                      padding: AppSizes.screenPadding,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

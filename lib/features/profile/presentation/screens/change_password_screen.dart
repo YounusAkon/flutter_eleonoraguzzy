@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_eleonoraguzzy/core/common/widget/reactive_button/save_button.dart';
 import 'package:flutter_eleonoraguzzy/core/notifiers/snackbar_notifier.dart';
 import 'package:flutter_eleonoraguzzy/core/theme/app_colors.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/profile/controller/change_password_controller.dart';
 import '../../../../core/theme/text_style.dart';
 
@@ -11,6 +12,7 @@ class ChangePasswordScreen extends StatefulWidget {
   @override
   State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
 }
+
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   late final ChangePasswordController _changePasswordController;
   final _formKey = GlobalKey<FormState>();
@@ -74,7 +76,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
+          padding: AppSizes.screenPadding,
           child: Form(
             key: _formKey,
             child: Column(
@@ -128,7 +130,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     onSaveTap: () {
                       if (_formKey.currentState!.validate()) {
                         _changePasswordController.changePassword(
-                          snackbarNotifier: _changePasswordController.snackbarNotifier,
+                          snackbarNotifier:
+                              _changePasswordController.snackbarNotifier,
                         );
                       }
                     },
@@ -173,10 +176,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           focusedBorder: inputBorder.copyWith(
             borderSide: const BorderSide(color: borderColor, width: 2),
           ),
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 24,
-          ),
+          contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 24),
           suffixIcon: IconButton(
             icon: Icon(
               obscureText ? Icons.visibility_off : Icons.visibility,

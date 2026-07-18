@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 
 import '../../../../core/theme/text_style.dart';
 import '../widgets/legal_content_widgets.dart';
@@ -22,7 +23,7 @@ class AboutAppScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: AppSizes.screenPadding,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

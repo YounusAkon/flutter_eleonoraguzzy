@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/information/controller/informetion_local_&_national_controller.dart';
 import 'package:flutter_eleonoraguzzy/features/information/model/local_&_national_news_model.dart';
 import 'package:flutter_eleonoraguzzy/features/information/presentation/screens/news_detail_screen.dart';
@@ -33,7 +34,7 @@ class PoliticalPartyWidget extends StatelessWidget {
         }
 
         return SingleChildScrollView(
-          padding: const EdgeInsets.all(12),
+          padding: AppSizes.screenPadding,
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eleonoraguzzy/core/common/widget/reactive_button/save_button.dart';
 import 'package:flutter_eleonoraguzzy/core/notifiers/snackbar_notifier.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/auth/presentation/screens/login_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter_eleonoraguzzy/core/theme/app_colors.dart';
@@ -39,7 +40,7 @@ class _SignupScreenState extends State<SignupScreen> {
               child: SingleChildScrollView(
                 physics: const ClampingScrollPhysics(),
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
+                  horizontal: AppSizes.screenPaddingValue,
                   vertical: 80,
                 ),
                 child: Column(

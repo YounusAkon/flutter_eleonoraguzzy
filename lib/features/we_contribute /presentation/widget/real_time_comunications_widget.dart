@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/we_contribute%20/controller/real_time_communications_controller.dart';
 import 'package:flutter_eleonoraguzzy/features/we_contribute%20/model/real_time_communications_model.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class RealTimeComunications extends StatelessWidget {
       }
 
       return SingleChildScrollView(
-        padding: const EdgeInsets.all(8),
+        padding: AppSizes.screenPadding,
         child: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(

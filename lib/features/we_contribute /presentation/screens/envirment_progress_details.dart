@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import '../../model/electoral_programs_model.dart';
 
 class EnvironmentProgressScreen extends StatelessWidget {
   final ElectoralItem item;
 
-  const EnvironmentProgressScreen({
-    super.key,
-    required this.item,
-  });
+  const EnvironmentProgressScreen({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +24,13 @@ class EnvironmentProgressScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: AppSizes.screenPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Progress Bar: ${item.score ?? 0}% complete',
-              style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-              ),
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
             ),
 
             const SizedBox(height: 24),
@@ -78,10 +73,7 @@ class EnvironmentProgressScreen extends StatelessWidget {
         Expanded(
           child: Text(
             title,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
           ),
         ),
         Text(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/we_contribute%20/presentation/screens/envirment_progress_details.dart';
 import 'package:get/get.dart';
 import '../../controller/electoral_programs_controller.dart';
@@ -25,11 +26,10 @@ class ElectoralProgressReportingWidget extends StatelessWidget {
             );
           }
 
-          final ElectoralProgressModel data =
-              controller.progressData.first;
+          final ElectoralProgressModel data = controller.progressData.first;
 
           return SingleChildScrollView(
-            padding: const EdgeInsets.all(12),
+            padding: AppSizes.screenPadding,
             child: Card(
               elevation: 0,
               shape: RoundedRectangleBorder(
@@ -146,10 +146,7 @@ class ElectoralProgressReportingWidget extends StatelessWidget {
             const SizedBox(height: 6),
             Text(
               "$value% complete",
-              style: const TextStyle(
-                fontSize: 14,
-                color: Color(0xFF6B7280),
-              ),
+              style: const TextStyle(fontSize: 14, color: Color(0xFF6B7280)),
             ),
           ],
         ),

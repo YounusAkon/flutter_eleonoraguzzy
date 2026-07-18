@@ -5,6 +5,7 @@ import 'package:flutter_eleonoraguzzy/features/profile/presentation/screens/subs
 import 'package:get/get.dart';
 import 'package:flutter_eleonoraguzzy/core/theme/app_colors.dart';
 import 'package:flutter_eleonoraguzzy/core/theme/app_gap.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/core/theme/text_style.dart';
 import 'package:flutter_eleonoraguzzy/features/profile/controller/get_profile_controller.dart';
 import 'package:flutter_eleonoraguzzy/features/profile/presentation/screens/change_password_screen.dart';
@@ -83,10 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               children: [
                 Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 16,
-                  ),
+                  margin: AppSizes.screenPadding,
                   child: Column(
                     children: [
                       _buildMenuItem(
@@ -135,14 +133,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                  margin: const EdgeInsets.fromLTRB(
+                    AppSizes.screenPaddingValue,
+                    0,
+                    AppSizes.screenPaddingValue,
+                    AppSizes.screenPaddingValue,
+                  ),
                   child: Column(
                     children: [
                       _buildMenuItem1(Icons.logout, 'Logout', () {
-                        showLogoutDialog(
-                          onConfirm: () {
-                          },
-                        );
+                        showLogoutDialog(onConfirm: () {});
                       }),
                       _buildMenuItem1(
                         Icons.delete_forever,
@@ -299,8 +299,7 @@ void showLogoutDialog({required VoidCallback onConfirm}) {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 28),
       ),
-      onPressed: () {
-      },
+      onPressed: () {},
       child: const Text("Cancel"),
     ),
     confirm: ElevatedButton(

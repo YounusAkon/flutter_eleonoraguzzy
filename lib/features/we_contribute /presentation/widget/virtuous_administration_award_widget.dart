@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/we_contribute%20/presentation/screens/virtuous_winners_screen.dart';
 
 class VirtuousAdministrationAwardWidget extends StatelessWidget {
@@ -11,7 +12,7 @@ class VirtuousAdministrationAwardWidget extends StatelessWidget {
       body: SafeArea(
         child: Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(12),
+          padding: AppSizes.screenPadding,
           child: Card(
             elevation: 0,
             color: Colors.white,
@@ -57,8 +58,10 @@ class VirtuousAdministrationAwardWidget extends StatelessWidget {
                   // Winner box
                   Container(
                     width: double.infinity,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 10,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFFF9FAFB),
                       borderRadius: BorderRadius.circular(8),
@@ -99,7 +102,6 @@ class VirtuousAdministrationAwardWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    
                   ),
 
                   const SizedBox(height: 20),

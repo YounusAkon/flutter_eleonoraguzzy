@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eleonoraguzzy/core/theme/app_colors.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/core/theme/text_style.dart';
 
 class FaqScreen extends StatelessWidget {
@@ -76,7 +77,7 @@ class FaqScreen extends StatelessWidget {
       body: Container(
         color: AppColors.white,
         child: ListView.builder(
-          padding: EdgeInsets.all(16),
+          padding: AppSizes.screenPadding,
           itemCount: faqs.length,
           itemBuilder: (context, index) {
             final item = faqs[index];

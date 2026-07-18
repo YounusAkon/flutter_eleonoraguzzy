@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 
 import '../../../../core/theme/text_style.dart';
 import '../widgets/legal_content_widgets.dart';
@@ -22,7 +23,7 @@ class TermsConditionScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: AppSizes.screenPadding,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -118,7 +119,9 @@ class TermsConditionScreen extends StatelessWidget {
                   "or permanent termination.",
                 ),
 
-                const LegalSectionTitle("6. Community Discussions and Proposals"),
+                const LegalSectionTitle(
+                  "6. Community Discussions and Proposals",
+                ),
                 const LegalParagraph(
                   "Voice encourages constructive civic participation.",
                 ),
@@ -133,7 +136,9 @@ class TermsConditionScreen extends StatelessWidget {
                   "these Terms.",
                 ),
 
-                const LegalSectionTitle("7. Public Information and News Content"),
+                const LegalSectionTitle(
+                  "7. Public Information and News Content",
+                ),
                 const LegalParagraph(
                   "Information, news, tenders, announcements, and civic updates provided through "
                   "the Platform are for informational purposes only.",
@@ -153,7 +158,9 @@ class TermsConditionScreen extends StatelessWidget {
                   "necessary.",
                 ),
 
-                const LegalSectionTitle("8. Educational Content and Gamification"),
+                const LegalSectionTitle(
+                  "8. Educational Content and Gamification",
+                ),
                 const LegalParagraph(
                   "The educational modules, quizzes, tests, certificates, voting licenses, "
                   "badges, and social awards available within Voice are intended for learning "
@@ -257,7 +264,9 @@ class TermsConditionScreen extends StatelessWidget {
                   "Accuracy of information",
                   "Continuous availability",
                 ]),
-                const LegalParagraph("Your use of the Platform is at your own risk."),
+                const LegalParagraph(
+                  "Your use of the Platform is at your own risk.",
+                ),
 
                 const LegalSectionTitle("15. Limitation of Liability"),
                 const LegalParagraph(
@@ -292,7 +301,9 @@ class TermsConditionScreen extends StatelessWidget {
                 ),
 
                 const LegalSectionTitle("17. Changes to These Terms"),
-                const LegalParagraph("We may revise these Terms from time to time."),
+                const LegalParagraph(
+                  "We may revise these Terms from time to time.",
+                ),
                 const LegalParagraph(
                   "Updated versions will be posted within the Platform and become effective "
                   "upon publication unless otherwise stated.",

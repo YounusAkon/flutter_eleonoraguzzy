@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/tender/screen/tender_details.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -55,7 +56,7 @@ class TenderScreen extends StatelessWidget {
               return RefreshIndicator(
                 onRefresh: controller.fetchTenders,
                 child: ListView.builder(
-                  padding: const EdgeInsets.all(16),
+                  padding: AppSizes.screenPadding,
                   itemCount: controller.tenders.length,
                   itemBuilder: (context, index) {
                     return TenderCard(tender: controller.tenders[index]);

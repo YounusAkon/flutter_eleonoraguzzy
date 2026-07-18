@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/we_contribute%20/controller/virtuous_award_controller.dart';
 import 'package:flutter_eleonoraguzzy/features/we_contribute%20/model/virtuous_award_model.dart';
 import 'package:get/get.dart';
@@ -40,14 +41,15 @@ class VirtuousWinnersScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: const [
-                Icon(Icons.emoji_events_outlined, size: 56, color: Color(0xFFFFB300)),
+                Icon(
+                  Icons.emoji_events_outlined,
+                  size: 56,
+                  color: Color(0xFFFFB300),
+                ),
                 SizedBox(height: 12),
                 Text(
                   'No awards found',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Color(0xFF6B7280),
-                  ),
+                  style: TextStyle(fontSize: 15, color: Color(0xFF6B7280)),
                 ),
               ],
             ),
@@ -58,7 +60,7 @@ class VirtuousWinnersScreen extends StatelessWidget {
           color: const Color(0xFFFFB300),
           onRefresh: controller.fetchAwards,
           child: ListView.separated(
-            padding: const EdgeInsets.all(16),
+            padding: AppSizes.screenPadding,
             itemCount: controller.awards.length,
             separatorBuilder: (_, __) => const SizedBox(height: 12),
             itemBuilder: (context, index) {
@@ -94,7 +96,11 @@ class _AwardCard extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(Icons.emoji_events, color: Color(0xFFFFB300), size: 22),
+                const Icon(
+                  Icons.emoji_events,
+                  color: Color(0xFFFFB300),
+                  size: 22,
+                ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
@@ -109,7 +115,10 @@ class _AwardCard extends StatelessWidget {
                 if (award.year != null) ...[
                   const SizedBox(width: 8),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 3,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFFFFF8E1),
                       borderRadius: BorderRadius.circular(20),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/information/controller/active_calls_controller.dart';
 import 'package:get/get.dart';
 import 'package:flutter_eleonoraguzzy/features/information/model/active_calls_model.dart';
@@ -24,7 +25,7 @@ class ActiveCallsWidget extends StatelessWidget {
 
       return SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: AppSizes.screenPadding,
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.all(12),
@@ -188,11 +189,7 @@ class ActiveCallsWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(
-                Icons.calendar_today,
-                size: 16,
-                color: Colors.blueGrey,
-              ),
+              Icon(Icons.calendar_today, size: 16, color: Colors.blueGrey),
               const SizedBox(width: 4),
               Expanded(
                 child: Text(
@@ -218,6 +215,7 @@ class ActiveCallsWidget extends StatelessWidget {
     );
   }
 }
+
 String formatDeadline(String? deadline) {
   if (deadline == null || deadline.isEmpty) return '';
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eleonoraguzzy/core/common/widget/reactive_button/save_button.dart';
 import 'package:flutter_eleonoraguzzy/core/notifiers/button_status_notifier.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 
 class SubscriptionPlan extends StatelessWidget {
   const SubscriptionPlan({super.key});
@@ -37,7 +38,7 @@ class SubscriptionPlan extends StatelessWidget {
         ),
       ),
       body: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        padding: AppSizes.screenPadding,
         children: const [BasicSubscriptionCard(), PremiumSubscriptionCard()],
       ),
     );

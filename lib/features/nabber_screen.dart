@@ -40,17 +40,12 @@ class AppGround extends StatelessWidget {
       () => Scaffold(
         body: controller.pages[controller.currentIndex.value],
         bottomNavigationBar: Container(
-          height: 90,
+          height: 75,
           margin: EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: const Color(0xFFECEDFD),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(controller.icons.length, (index) {
-              final isSelected = controller.currentIndex.value == index;
+              final isSelected =  controller.currentIndex.value == index;
 
               return GestureDetector(
                 onTap: () => controller.currentIndex.value = index,

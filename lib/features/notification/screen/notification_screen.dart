@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:get/get.dart';
 import '../controller/notification_controller.dart';
 import '../model/notification_model.dart';
@@ -44,7 +45,7 @@ class NotificationScreen extends StatelessWidget {
         }
 
         return SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          padding: AppSizes.screenPadding,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -87,94 +88,102 @@ class NotificationScreen extends StatelessWidget {
   }
 
   Widget _buildNotificationItem(
-  NotificationModel notification,
-  NotificationController controller,
-) {
-  final bool isExpanded = notification.isExpanded;
-  final String displayMessage = isExpanded 
-      ? notification.message 
-      : _getTruncatedMessage(notification.message);
+    NotificationModel notification,
+    NotificationController controller,
+  ) {
+    final bool isExpanded = notification.isExpanded;
+    final String displayMessage = isExpanded
+        ? notification.message
+        : _getTruncatedMessage(notification.message);
 
-  return InkWell(
-    onTap: () {
-      controller.toggleNotificationExpand(notification.id);
-      if (!notification.isRead) {
-        controller.markAsReadById(notification.id);
-      }
-    },
-    child: Container(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-      decoration: BoxDecoration(
-        color: notification.isRead ? Colors.white : Colors.blue.shade50,
-        border: const Border(bottom: BorderSide(color: Colors.black12)),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  notification.title,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
+    return InkWell(
+      onTap: () {
+        controller.toggleNotificationExpand(notification.id);
+        if (!notification.isRead) {
+          controller.markAsReadById(notification.id);
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+        decoration: BoxDecoration(
+          color: notification.isRead ? Colors.white : Colors.blue.shade50,
+          border: const Border(bottom: BorderSide(color: Colors.black12)),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    notification.title,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  displayMessage,
-                  maxLines: isExpanded ? null : 1,
-                  overflow: isExpanded ? null : TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    color: Colors.black87,
-                    height: 1.3,
+                  const SizedBox(height: 4),
+                  Text(
+                    displayMessage,
+                    maxLines: isExpanded ? null : 1,
+                    overflow: isExpanded ? null : TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      color: Colors.black87,
+                      height: 1.3,
+                    ),
                   ),
-                ),
-                if (!isExpanded && notification.message.length > 60)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 2),
-                    child: Text(
-                      "Read more...",
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.blue.shade700,
-                        fontWeight: FontWeight.w500,
+                  if (!isExpanded && notification.message.length > 60)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 2),
+                      child: Text(
+                        "Read more...",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.blue.shade700,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  _timeAgo(notification.createdAt),
+                  style: const TextStyle(fontSize: 12, color: Colors.black54),
+                ),
+                if (isExpanded)
+                  const Icon(
+                    Icons.keyboard_arrow_up,
+                    size: 16,
+                    color: Colors.grey,
+                  ),
+                if (!isExpanded)
+                  const Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 16,
+                    color: Colors.grey,
                   ),
               ],
             ),
-          ),
-          const SizedBox(width: 12),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                _timeAgo(notification.createdAt),
-                style: const TextStyle(fontSize: 12, color: Colors.black54),
-              ),
-              if (isExpanded)
-                const Icon(Icons.keyboard_arrow_up, size: 16, color: Colors.grey),
-              if (!isExpanded)
-                const Icon(Icons.keyboard_arrow_down, size: 16, color: Colors.grey),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
-// Helper to truncate message nicely
-String _getTruncatedMessage(String message) {
-  const maxLength = 70; // adjust as you like
-  if (message.length <= maxLength) return message;
-  return '${message.substring(0, maxLength - 3)}...';
-}
+  // Helper to truncate message nicely
+  String _getTruncatedMessage(String message) {
+    const maxLength = 70; // adjust as you like
+    if (message.length <= maxLength) return message;
+    return '${message.substring(0, maxLength - 3)}...';
+  }
 
   /// Simple time formatter (you can replace with timeago package)
   String _timeAgo(DateTime date) {

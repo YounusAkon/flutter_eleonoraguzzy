@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import '../../../../core/theme/text_style.dart';
 import '../widgets/legal_content_widgets.dart';
 
@@ -21,7 +22,7 @@ class Privacypolicy extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: AppSizes.screenPadding,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -93,7 +94,9 @@ class Privacypolicy extends StatelessWidget {
                 ]),
 
                 const LegalSectionTitle("3. Sharing of Information"),
-                const LegalParagraph("We do not sell your personal information."),
+                const LegalParagraph(
+                  "We do not sell your personal information.",
+                ),
                 const LegalParagraph("We may share information with:"),
                 const LegalBulletList([
                   "Government institutions and municipalities providing services through the platform",

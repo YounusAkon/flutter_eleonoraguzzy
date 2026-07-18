@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/information/model/local_&_national_news_model.dart';
 import 'package:intl/intl.dart';
 
@@ -10,7 +11,9 @@ class NewsDetailsScreen extends StatelessWidget {
   String _formatDate(String? isoDate) {
     if (isoDate == null || isoDate.isEmpty) return '';
     try {
-      return DateFormat('MMMM d, yyyy').format(DateTime.parse(isoDate).toLocal());
+      return DateFormat(
+        'MMMM d, yyyy',
+      ).format(DateTime.parse(isoDate).toLocal());
     } catch (_) {
       return '';
     }
@@ -41,7 +44,7 @@ class NewsDetailsScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: AppSizes.screenPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -50,7 +53,10 @@ class NewsDetailsScreen extends StatelessWidget {
               children: [
                 if (category.isNotEmpty)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.blue,
                       borderRadius: BorderRadius.circular(20),
@@ -68,10 +74,7 @@ class NewsDetailsScreen extends StatelessWidget {
                 if (formattedDate.isNotEmpty)
                   Text(
                     formattedDate,
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 13,
-                    ),
+                    style: const TextStyle(color: Colors.grey, fontSize: 13),
                   ),
               ],
             ),

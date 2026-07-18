@@ -5,6 +5,7 @@ import 'package:flutter_eleonoraguzzy/features/auth/presentation/screens/signup_
 import 'package:flutter_eleonoraguzzy/features/nabber_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter_eleonoraguzzy/core/theme/app_colors.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/onbording/app_gradient.dart';
 import 'package:flutter_eleonoraguzzy/features/onbording/common/app_logo.dart';
 import 'package:flutter_eleonoraguzzy/features/onbording/common/textfield.dart';
@@ -48,10 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     child: IntrinsicHeight(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0,
-                          vertical: 16,
-                        ),
+                        padding: AppSizes.screenPadding,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [

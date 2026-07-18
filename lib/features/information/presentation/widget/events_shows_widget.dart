@@ -240,7 +240,6 @@
 // //   }
 // // }
 
-
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 // import 'package:flutter_eleonoraguzzy/features/information/controller/event_shows_controller.dart';
@@ -535,8 +534,8 @@
 //   }
 // }
 
-
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:get/get.dart';
 import 'package:flutter_eleonoraguzzy/features/information/controller/event_shows_controller.dart';
 import 'package:flutter_eleonoraguzzy/features/information/model/event_shows_model.dart';
@@ -574,22 +573,17 @@ class EventsShowsWidget extends StatelessWidget {
 
       body: Obx(() {
         if (controller.isLoading.value) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const Center(child: CircularProgressIndicator());
         }
 
         if (controller.eventShowsList.isEmpty) {
           return const Center(
-            child: Text(
-              'No events available',
-              style: TextStyle(fontSize: 16),
-            ),
+            child: Text('No events available', style: TextStyle(fontSize: 16)),
           );
         }
 
         return SingleChildScrollView(
-          padding: const EdgeInsets.all(12),
+          padding: AppSizes.screenPadding,
 
           child: Container(
             width: double.infinity,
@@ -623,10 +617,7 @@ class EventsShowsWidget extends StatelessWidget {
                   child: OutlinedButton.icon(
                     onPressed: () {},
 
-                    icon: const Icon(
-                      Icons.menu_book,
-                      color: Colors.blue,
-                    ),
+                    icon: const Icon(Icons.menu_book, color: Colors.blue),
 
                     label: const Text(
                       'Read All the News',
@@ -637,10 +628,7 @@ class EventsShowsWidget extends StatelessWidget {
                     ),
 
                     style: OutlinedButton.styleFrom(
-                      side: const BorderSide(
-                        color: Colors.blue,
-                        width: 1.5,
-                      ),
+                      side: const BorderSide(color: Colors.blue, width: 1.5),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -659,10 +647,7 @@ class EventsShowsWidget extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Icon(
-          Icons.calendar_today_outlined,
-          color: Colors.green,
-        ),
+        const Icon(Icons.calendar_today_outlined, color: Colors.green),
 
         const SizedBox(width: 8),
 
@@ -690,10 +675,7 @@ class EventsShowsWidget extends StatelessWidget {
     );
   }
 
-  Widget _eventShowItem(
-    BuildContext context,
-    EventShowsModel event,
-  ) {
+  Widget _eventShowItem(BuildContext context, EventShowsModel event) {
     final theme = Theme.of(context);
 
     // ONE color for this tag (background + text will match)
@@ -707,11 +689,7 @@ class EventsShowsWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
 
         boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 6,
-            offset: Offset(0, 3),
-          ),
+          BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 3)),
         ],
 
         border: Border.all(color: Colors.black26),
@@ -735,7 +713,6 @@ class EventsShowsWidget extends StatelessWidget {
                   ),
                 ),
               ),
-
 
               Container(
                 padding: const EdgeInsets.symmetric(
@@ -763,10 +740,7 @@ class EventsShowsWidget extends StatelessWidget {
 
           const SizedBox(height: 8),
 
-          Text(
-            event.description,
-            style: theme.textTheme.titleMedium,
-          ),
+          Text(event.description, style: theme.textTheme.titleMedium),
 
           const SizedBox(height: 12),
 
@@ -777,18 +751,13 @@ class EventsShowsWidget extends StatelessWidget {
               // location
               Row(
                 children: [
-                  const Icon(
-                    Icons.location_on_outlined,
-                    size: 18,
-                  ),
+                  const Icon(Icons.location_on_outlined, size: 18),
 
                   const SizedBox(width: 4),
 
                   Text(
                     event.location,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      fontSize: 14,
-                    ),
+                    style: theme.textTheme.bodySmall?.copyWith(fontSize: 14),
                   ),
                 ],
               ),
@@ -796,18 +765,13 @@ class EventsShowsWidget extends StatelessWidget {
               // date
               Row(
                 children: [
-                  const Icon(
-                    Icons.calendar_month,
-                    size: 16,
-                  ),
+                  const Icon(Icons.calendar_month, size: 16),
 
                   const SizedBox(width: 4),
 
                   Text(
                     event.formattedDateRange,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      fontSize: 14,
-                    ),
+                    style: theme.textTheme.bodySmall?.copyWith(fontSize: 14),
                   ),
                 ],
               ),
@@ -825,19 +789,14 @@ extension EventShowsModelExtension on EventShowsModel {
       return '';
     }
 
-    if (enddate == null ||
-        enddate!.isEmpty ||
-        startdate == enddate) {
-      return DateFormat('MMMM d, yyyy').format(
-        DateTime.parse(startdate!),
-      );
+    if (enddate == null || enddate!.isEmpty || startdate == enddate) {
+      return DateFormat('MMMM d, yyyy').format(DateTime.parse(startdate!));
     }
 
     DateTime start = DateTime.parse(startdate!);
     DateTime end = DateTime.parse(enddate!);
 
-    if (start.month == end.month &&
-        start.year == end.year) {
+    if (start.month == end.month && start.year == end.year) {
       return '${DateFormat('MMMM').format(start)} ${start.day}-${end.day}, ${start.year}';
     }
 

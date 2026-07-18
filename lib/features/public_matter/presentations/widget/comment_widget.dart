@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/public_matter/controller/public_matter_controller.dart';
 import 'package:flutter_eleonoraguzzy/features/public_matter/service/public_matter_interface.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class CommentWidget extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(12.0),
+      padding: AppSizes.screenPadding,
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,

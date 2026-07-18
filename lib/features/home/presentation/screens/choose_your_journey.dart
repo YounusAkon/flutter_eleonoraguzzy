@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 
 class JourneyScreen extends StatefulWidget {
   final Map<String, dynamic> pet;
@@ -59,7 +60,7 @@ class _JourneyScreenState extends State<JourneyScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: AppSizes.screenPadding,
         child: SingleChildScrollView(
           child: Container(
             decoration: BoxDecoration(

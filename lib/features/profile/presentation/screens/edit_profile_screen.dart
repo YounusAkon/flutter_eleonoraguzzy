@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_eleonoraguzzy/core/common/widget/reactive_button/save_button.dart';
 import 'package:flutter_eleonoraguzzy/core/notifiers/snackbar_notifier.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/core/theme/text_style.dart';
 import 'package:flutter_eleonoraguzzy/features/profile/controller/edit_profile_controller.dart';
 import 'package:flutter_eleonoraguzzy/features/profile/controller/get_profile_controller.dart';
@@ -52,7 +53,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSizes.screenPaddingValue,
+          vertical: 20,
+        ),
         child: Column(
           children: [
             const SizedBox(height: 20),

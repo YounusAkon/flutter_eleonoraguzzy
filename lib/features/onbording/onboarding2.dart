@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eleonoraguzzy/app/app_manager.dart';
 import 'package:flutter_eleonoraguzzy/core/theme/app_colors.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/onbording/app_gradient.dart';
 import 'package:flutter_eleonoraguzzy/features/onbording/onboarding3.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,10 @@ class Onboarding2Screen extends StatelessWidget {
       body: AppGradient.withGradientBackground(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSizes.screenPaddingValue,
+              vertical: 16,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

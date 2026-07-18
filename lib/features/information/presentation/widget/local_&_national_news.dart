@@ -248,8 +248,8 @@
 //   }
 // }
 
-
 import 'package:flutter/material.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -288,10 +288,12 @@ class LocalAndNationalNewsWidget extends StatelessWidget {
 
       // ================= FILTER ONLY LOCAL & NATIONAL =================
       final filteredNews = controller.newsList
-          .where((news) =>
-              news.category != null &&
-              (news.category!.toLowerCase() == 'local' ||
-                  news.category!.toLowerCase() == 'national'))
+          .where(
+            (news) =>
+                news.category != null &&
+                (news.category!.toLowerCase() == 'local' ||
+                    news.category!.toLowerCase() == 'national'),
+          )
           .toList();
 
       if (filteredNews.isEmpty) {
@@ -305,7 +307,7 @@ class LocalAndNationalNewsWidget extends StatelessWidget {
 
       return SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: AppSizes.screenPadding,
           child: Container(
             width: double.infinity,
             padding: const EdgeInsets.all(12),
@@ -400,10 +402,7 @@ class LocalAndNationalNewsWidget extends StatelessWidget {
       ),
       child: const Text(
         'Note: We collaborate with several publications to offer you a complete overview.',
-        style: TextStyle(
-          fontSize: 16,
-          color: Color(0xFF3377FF),
-        ),
+        style: TextStyle(fontSize: 16, color: Color(0xFF3377FF)),
       ),
     );
   }
@@ -416,9 +415,7 @@ class LocalAndNationalNewsWidget extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (_) => NewsDetailsScreen(news: news),
-          ),
+          MaterialPageRoute(builder: (_) => NewsDetailsScreen(news: news)),
         );
       },
       child: Container(

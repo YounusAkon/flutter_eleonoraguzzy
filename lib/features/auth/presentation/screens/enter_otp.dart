@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_eleonoraguzzy/core/common/widget/reactive_button/save_button.dart';
 import 'package:flutter_eleonoraguzzy/core/notifiers/snackbar_notifier.dart';
+import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
 import 'package:flutter_eleonoraguzzy/features/auth/controller/verify_account_view_controller.dart';
 import 'package:flutter_eleonoraguzzy/features/auth/presentation/screens/reset_password.dart';
 import 'package:flutter_eleonoraguzzy/features/onbording/app_gradient.dart';
@@ -73,10 +74,7 @@ class _EnterOtpState extends State<EnterOtp> {
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minHeight: constraints.maxHeight),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 16,
-                    ),
+                    padding: AppSizes.screenPadding,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
