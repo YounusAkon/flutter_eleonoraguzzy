@@ -24,6 +24,10 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Voice needs camera access only if you choose to take a profile photo.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Voice needs photo library access so you can choose a profile picture.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSceneManifest</key>
