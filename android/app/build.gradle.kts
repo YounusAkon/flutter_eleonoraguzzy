@@ -49,13 +49,23 @@ android {
 
     buildTypes {
         release {
-            signingConfig = if (keystorePropertiesFile.exists()) {
-                signingConfigs.getByName("release")
-            } else {
-                // Fall back to debug signing when no release keystore is configured.
-                signingConfigs.getByName("debug")
+            if (keystorePropertiesFile.exists()) {
+                signingConfig = signingConfigs.getByName("release")
             }
         }
+    }
+}
+
+gradle.taskGraph.whenReady {
+    val isReleaseBuild = allTasks.any {
+        it.path.contains("Release", ignoreCase = true) ||
+            it.name.contains("Release", ignoreCase = true)
+    }
+
+    if (isReleaseBuild && !keystorePropertiesFile.exists()) {
+        throw GradleException(
+            "Missing android/key.properties. Release builds must be signed with the Play Console upload key."
+        )
     }
 }
 
