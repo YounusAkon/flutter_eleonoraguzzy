@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_eleonoraguzzy/core/common/widget/reactive_button/save_button.dart';
 import 'package:flutter_eleonoraguzzy/features/auth/presentation/screens/forget_password.dart';
 import 'package:flutter_eleonoraguzzy/features/auth/presentation/screens/signup_screen.dart';
-import 'package:flutter_eleonoraguzzy/features/nabber_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter_eleonoraguzzy/core/theme/app_colors.dart';
 import 'package:flutter_eleonoraguzzy/core/theme/app_sizes.dart';
@@ -175,14 +174,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                   );
                                 },
 
-                                onDone: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => AppGround(),
-                                    ),
-                                  );
-                                },
+                                // AppManager listens for the authenticated
+                                // state and performs the post-login route.
+                                // Keeping navigation there prevents duplicate
+                                // AppGround pages from being pushed.
+                                onDone: () {},
                               ),
                             ),
 
