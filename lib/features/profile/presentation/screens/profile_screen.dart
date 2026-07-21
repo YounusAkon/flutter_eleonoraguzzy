@@ -23,13 +23,12 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final ProfileController controller = Get.put<ProfileController>(
-    ProfileController(),
-  );
+  final ProfileController controller = Get.find<ProfileController>();
 
   @override
   void initState() {
     super.initState();
+    // Uses the cached profile when available and retries after a failed load.
     controller.getCurrentUserProfile();
   }
 

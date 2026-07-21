@@ -16,12 +16,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final ProfileController profilecontroller = Get.put(ProfileController());
+  final ProfileController profilecontroller = Get.find<ProfileController>();
   int selectedPetIndex = 1;
 
   @override
   void initState() {
     super.initState();
+    // Retry automatically if the initial authenticated load failed.
     profilecontroller.getCurrentUserProfile();
   }
 

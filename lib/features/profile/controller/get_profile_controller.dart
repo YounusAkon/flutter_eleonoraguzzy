@@ -13,14 +13,16 @@ class ProfileController extends GetxController {
 
   final Rxn<ProfileModel> profile = Rxn<ProfileModel>();
   final RxBool isLoading = false.obs;
+  bool _hasLoadedProfile = false;
 
-  @override
-  void onInit() {
-    super.onInit();
-    getCurrentUserProfile();
-  }
+  Future<void> getCurrentUserProfile({bool forceRefresh = false}) async {
+    if (isLoading.value || (_hasLoadedProfile && !forceRefresh)) return;
 
-  Future<void> getCurrentUserProfile() async {
+    if (forceRefresh) {
+      profile.value = null;
+      _hasLoadedProfile = false;
+    }
+
     final app = Get.find<AppManager>();
     if (app.currentAuthStatus is! Authenticated) {
       debugPrint("User not authenticated");
@@ -32,21 +34,24 @@ class ProfileController extends GetxController {
 
     isLoading.value = true;
 
-    debugPrint("Fetching profile for user: $userId");
+    try {
+      debugPrint("Fetching profile for user: $userId");
 
-    final result = await repo.getProfile(userId);
+      final result = await repo.getProfile(userId);
 
-    result.fold(
-      (failure) {
-        debugPrint("PROFILE ERROR: $failure");
-      },
-      (success) {
-        debugPrint("PROFILE LOADED: ${success.data?.name}");
-        profile.value = success.data;
-      },
-    );
-
-    isLoading.value = false;
+      result.fold(
+        (failure) {
+          debugPrint("PROFILE ERROR: $failure");
+        },
+        (success) {
+          debugPrint("PROFILE LOADED: ${success.data?.name}");
+          profile.value = success.data;
+          _hasLoadedProfile = success.data != null;
+        },
+      );
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   Future<void> deleteAccount({

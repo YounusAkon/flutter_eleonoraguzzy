@@ -30,7 +30,9 @@ void initServices() {
   Get.put<AuthInterface>(AuthInterfaceImpl(Get.find()));
   Get.put<AuthController>(AuthController(Get.find()), permanent: true);
   Get.put<ProfilInterface>(ProfileInterfaceImpl(appPigeon: Get.find()));
-  Get.lazyPut<ProfileController>(() => ProfileController());
+  // Profile data is shared by Home, Profile, and Edit Profile. Keep one
+  // instance available so route changes cannot make Get.find fail.
+  Get.put<ProfileController>(ProfileController(), permanent: true);
 
   Get.lazyPut<TenderInterface>(() => TenderInterfaceImpl(Get.find()));
   Get.put(TenderController(Get.find<TenderInterface>()));
@@ -53,5 +55,4 @@ void initServices() {
     () => NotificationInterfaceImpl(appPigeon: Get.find()),
   );
   Get.lazyPut(() => NotificationController(), fenix: true);
-
 }

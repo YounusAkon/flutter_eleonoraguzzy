@@ -154,13 +154,10 @@ class AppManager extends GetxController {
 
       await _initializeControllers();
 
-      if (Get.isRegistered<ProfileController>()) {
-        Get.delete<ProfileController>();
-      }
+      final profileController = Get.find<ProfileController>();
+      await profileController.getCurrentUserProfile(forceRefresh: true);
 
-      Get.put(ProfileController());
-
-      Get.offAll(() => AppGround());
+      Get.offAll(() => const AppGround());
     }
 
     update();

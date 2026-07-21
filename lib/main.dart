@@ -28,8 +28,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    appManager = Get.put(AppManager());
-    appManager.onInit();
+    // AppManager is registered and initialized by initServices(). Do not
+    // call onInit again here, otherwise authStream gets two listeners.
+    appManager = Get.find<AppManager>();
   }
 
   @override
