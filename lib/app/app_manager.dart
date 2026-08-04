@@ -98,6 +98,10 @@ class AppManager extends GetxController {
   AuthStatus get currentAuthStatus => _authStatus;
 
   bool _onboardingChecked = false;
+  StreamSubscription<AuthStatus>? _authSubscription;
+  AuthStatus? _pendingAuthStatus;
+  AuthStatus? _lastRoutedStatus;
+  bool _isRouting = false;
 
   final Debouncer authDebouncer = Debouncer(
     delay: const Duration(milliseconds: 100),
@@ -106,19 +110,35 @@ class AppManager extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _init();
+    // GetX services are initialized before runApp(). Wait until the first
+    // frame so navigation has a ready Navigator, then read the current auth
+    // state instead of depending on an already-emitted stream event.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!isClosed) {
+        unawaited(_init());
+      }
+    });
   }
 
   Future<void> _init() async {
     debugPrint("AppManager initialized");
 
-    // final initialAuthStatus = await Get.find<AppPigeon>().currentAuth();
+    final appPigeon = Get.find<AppPigeon>();
 
-    // ✅ WAIT until UI is ready
-    Get.find<AppPigeon>().authStream.listen((authstatus) {
+    _authSubscription = appPigeon.authStream.listen((authstatus) {
       debugPrint("authstatus is::: $authstatus");
-      _decideRoute(authstatus);
+      unawaited(_queueRoute(authstatus));
     });
+
+    // The initial AuthLoading/AuthStatus events may have happened before the
+    // subscription was attached. Reading the current value closes that race.
+    await _queueRoute(await appPigeon.currentAuth());
+  }
+
+  @override
+  void onClose() {
+    _authSubscription?.cancel();
+    super.onClose();
   }
 
   /// Called by the onboarding flow once the user finishes (or skips) it.
@@ -127,7 +147,45 @@ class AppManager extends GetxController {
   Future<void> completeOnboarding() async {
     await OnboardingStorage.setOnboardingSeen();
     _onboardingChecked = true;
-    await _decideRoute(_authStatus);
+    // The same auth status was intentionally routed to onboarding already;
+    // allow it to be routed again now that onboarding is complete.
+    _lastRoutedStatus = null;
+    await _queueRoute(_authStatus);
+  }
+
+  Future<void> _queueRoute(AuthStatus? authStatus) async {
+    if (authStatus == null || authStatus is AuthLoading) return;
+
+    _pendingAuthStatus = authStatus;
+    if (_isRouting) return;
+
+    _isRouting = true;
+    try {
+      while (_pendingAuthStatus != null) {
+        final nextStatus = _pendingAuthStatus!;
+        _pendingAuthStatus = null;
+
+        // Login/logout can publish through both the explicit event above and
+        // the storage listener. Avoid rebuilding the authenticated route
+        // twice when both notifications arrive.
+        if (_sameRouteState(_lastRoutedStatus, nextStatus)) continue;
+
+        await _decideRoute(nextStatus);
+        _lastRoutedStatus = nextStatus;
+      }
+    } finally {
+      _isRouting = false;
+    }
+  }
+
+  bool _sameRouteState(AuthStatus? first, AuthStatus second) {
+    if (first is UnAuthenticated && second is UnAuthenticated) return true;
+
+    if (first is Authenticated && second is Authenticated) {
+      return first.auth.userId == second.auth.userId;
+    }
+
+    return false;
   }
 
   Future<void> _decideRoute(AuthStatus? authStatus) async {

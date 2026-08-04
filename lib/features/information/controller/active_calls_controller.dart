@@ -1,6 +1,7 @@
 import 'package:flutter_eleonoraguzzy/features/information/model/active_calls_model.dart';
 import 'package:get/get.dart';
 import 'package:flutter_eleonoraguzzy/features/information/service/information_interface.dart';
+import 'package:flutter_eleonoraguzzy/core/helpers/date_window.dart';
 
 class ActivecallsController extends GetxController {
   final InformationInterface repo;
@@ -27,7 +28,11 @@ class ActivecallsController extends GetxController {
         activeCallsList.clear();
       },
       (success) {
-        activeCallsList.assignAll(success.data ?? []);
+        activeCallsList.assignAll(
+          (success.data ?? [])
+              .where((call) => DateWindow.includes(call.deadline))
+              .toList(),
+        );
       },
     );
 

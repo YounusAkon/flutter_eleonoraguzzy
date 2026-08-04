@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_eleonoraguzzy/core/api_handler/failure.dart';
 import 'package:flutter_eleonoraguzzy/core/helpers/handle_fold.dart';
 import 'package:flutter_eleonoraguzzy/core/notifiers/button_status_notifier.dart';
+import 'package:flutter_eleonoraguzzy/core/helpers/date_window.dart';
 import 'package:get/get.dart';
 import '../service/notification_interface.dart';
 import '../model/notification_model.dart';
@@ -80,8 +81,13 @@ class NotificationController extends GetxController {
           if (error.failure == Failure.forbidden) ();
         },
         onSuccess: (data) {
-          notifications.value = data;
-          debugPrint("data >> ${data.length}");
+          final filteredNotifications = data
+              .where(
+                (notification) => DateWindow.includes(notification.createdAt),
+              )
+              .toList();
+          notifications.value = filteredNotifications;
+          debugPrint("data >> ${filteredNotifications.length}");
           notifications.refresh();
           update();
         },
@@ -101,13 +107,9 @@ class NotificationController extends GetxController {
     if (index == -1) return;
 
     final current = notifications[index];
-    notifications[index] = current.copyWith(
-      isExpanded: !current.isExpanded,
-    );
-    
+    notifications[index] = current.copyWith(isExpanded: !current.isExpanded);
+
     // Very important for GetX to detect change properly
     notifications.refresh();
   }
-
-
 }

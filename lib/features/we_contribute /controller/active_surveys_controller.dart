@@ -1,6 +1,8 @@
 import 'package:flutter_eleonoraguzzy/features/we_contribute%20/model/active_surveys_model.dart';
 import 'package:flutter_eleonoraguzzy/features/we_contribute%20/service/contribute_interface.dart';
 import 'package:get/get.dart';
+import 'package:flutter_eleonoraguzzy/core/helpers/date_window.dart';
+
 class ActiveSurveysController extends GetxController {
   final ContributeInterface repo;
 
@@ -27,7 +29,11 @@ class ActiveSurveysController extends GetxController {
         },
         (success) {
           final model = success.data;
-          surveys.assignAll(model ?? []);
+          surveys.assignAll(
+            (model ?? [])
+                .where((survey) => DateWindow.includes(survey.date))
+                .toList(),
+          );
         },
       );
     } catch (e) {

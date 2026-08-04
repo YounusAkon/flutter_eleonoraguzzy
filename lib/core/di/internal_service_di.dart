@@ -3,7 +3,6 @@ import 'package:flutter_eleonoraguzzy/features/auth/controller/auth_controller.d
 import 'package:flutter_eleonoraguzzy/features/auth/services/auth_interface.dart';
 import 'package:flutter_eleonoraguzzy/features/auth/services/auth_interface_impl.dart';
 import 'package:flutter_eleonoraguzzy/features/information/controller/active_calls_controller.dart';
-import 'package:flutter_eleonoraguzzy/features/information/controller/informetion_local_&_national_controller.dart';
 import 'package:flutter_eleonoraguzzy/features/information/service/information_interface.dart';
 import 'package:flutter_eleonoraguzzy/features/information/service/informetion_interface_impl.dart';
 import 'package:flutter_eleonoraguzzy/features/notification/controller/notification_controller.dart';
@@ -35,21 +34,35 @@ void initServices() {
   Get.put<ProfileController>(ProfileController(), permanent: true);
 
   Get.lazyPut<TenderInterface>(() => TenderInterfaceImpl(Get.find()));
-  Get.put(TenderController(Get.find<TenderInterface>()));
+  // These controllers fetch protected content in onInit(). Register them
+  // lazily so they are created by the authenticated screens, after the
+  // access token has been saved by the login flow.
+  Get.lazyPut<TenderController>(
+    () => TenderController(Get.find<TenderInterface>()),
+    fenix: true,
+  );
   Get.put<ContributeInterface>(ContributeInterfaceImpl(Get.find()));
 
-  Get.lazyPut<InformationInterface>(() => InformationInterfaceImpl(Get.find()));
-
-  Get.lazyPut<PublicMatterInterface>(
-    () => PublicMatterInterfaceImpl(Get.find()),
+  // Public Matter is used by a tab that remains available across auth-route
+  // transitions. Keep its repository registered for the lifetime of the app
+  // so Get.offAll cannot remove it before the tab is opened.
+  Get.put<PublicMatterInterface>(
+    PublicMatterInterfaceImpl(Get.find()),
+    permanent: true,
   );
   Get.put<InformationInterface>(InformationInterfaceImpl(Get.find()));
-  Get.put<NewsController>(NewsController(Get.find()));
-  Get.put(ActivecallsController(Get.find()));
-  Get.put(ElectoralProgressController(ContributeInterfaceImpl(Get.find())));
+  Get.lazyPut<ActivecallsController>(
+    () => ActivecallsController(Get.find<InformationInterface>()),
+    fenix: true,
+  );
+  Get.lazyPut<ElectoralProgressController>(
+    () => ElectoralProgressController(Get.find<ContributeInterface>()),
+    fenix: true,
+  );
 
-  Get.put<RealTimeCommunicationsController>(
-    RealTimeCommunicationsController(ContributeInterfaceImpl(Get.find())),
+  Get.lazyPut<RealTimeCommunicationsController>(
+    () => RealTimeCommunicationsController(Get.find<ContributeInterface>()),
+    fenix: true,
   );
   Get.lazyPut<NotificationInterface>(
     () => NotificationInterfaceImpl(appPigeon: Get.find()),

@@ -1,6 +1,7 @@
 import 'package:flutter_eleonoraguzzy/features/information/model/event_shows_model.dart';
 import 'package:get/get.dart';
 import 'package:flutter_eleonoraguzzy/features/information/service/information_interface.dart';
+import 'package:flutter_eleonoraguzzy/core/helpers/date_window.dart';
 
 class EventShowsController extends GetxController {
   final InformationInterface repo;
@@ -27,7 +28,14 @@ class EventShowsController extends GetxController {
         eventShowsList.clear();
       },
       (success) {
-        eventShowsList.assignAll(success.data ?? []);
+        eventShowsList.assignAll(
+          (success.data ?? [])
+              .where(
+                (event) =>
+                    DateWindow.includesRange(event.startdate, event.enddate),
+              )
+              .toList(),
+        );
       },
     );
 

@@ -48,6 +48,12 @@ android {
     }
 
     buildTypes {
+        // Keep local/debug installs separate from the production VOCE app.
+        // Release keeps the production applicationId for Play Store updates.
+        getByName("debug") {
+            applicationIdSuffix = ".debug"
+        }
+
         release {
             if (keystorePropertiesFile.exists()) {
                 signingConfig = signingConfigs.getByName("release")

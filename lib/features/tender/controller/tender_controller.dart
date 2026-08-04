@@ -1,6 +1,7 @@
 import 'package:flutter_eleonoraguzzy/features/tender/service/tender_interface.dart';
 import 'package:get/get.dart';
 import 'package:flutter_eleonoraguzzy/features/tender/model/tender_model.dart';
+import 'package:flutter_eleonoraguzzy/core/helpers/date_window.dart';
 
 class TenderController extends GetxController {
   TenderController(this._tenderInterface);
@@ -28,7 +29,11 @@ class TenderController extends GetxController {
         },
         (success) {
           final model = success.data;
-          tenders.assignAll(model?.data ?? []);
+          tenders.assignAll(
+            (model?.data ?? [])
+                .where((tender) => DateWindow.includes(tender.date))
+                .toList(),
+          );
         },
       );
     } catch (e) {
@@ -38,4 +43,3 @@ class TenderController extends GetxController {
     }
   }
 }
-

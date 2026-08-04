@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter_eleonoraguzzy/features/information/model/local_&_national_news_model.dart';
 import 'package:flutter_eleonoraguzzy/features/information/service/information_interface.dart';
+import 'package:flutter_eleonoraguzzy/core/helpers/date_window.dart';
 
 class NewsController extends GetxController {
   final InformationInterface repo;
@@ -27,7 +28,11 @@ class NewsController extends GetxController {
         newsList.clear();
       },
       (success) {
-        newsList.assignAll(success.data ?? []);
+        newsList.assignAll(
+          (success.data ?? [])
+              .where((news) => DateWindow.includes(news.publishDate))
+              .toList(),
+        );
       },
     );
 
